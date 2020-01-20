@@ -8,8 +8,6 @@ import kotlin.math.roundToInt
 
 class BitmapLoader(private val absoluteFilePath: String) {
 
-    // TODO we should do the loading of bitmaps asynchronously
-
     private val rotation: Int by lazy {
         val orientation = ExifInterface(absoluteFilePath).getAttributeInt(
             ExifInterface.TAG_ORIENTATION,
@@ -31,7 +29,7 @@ class BitmapLoader(private val absoluteFilePath: String) {
         val initialBitmap = loadScaledBitmap(maximalWidth, maximalHeight)
         val aspectRatio = initialBitmap.aspectRatio
 
-        // Here we calculate values for the resulting width and height, so we conform to both the given minimalWidth and minimalHeight
+        // Here we calculate values for the resulting width and height, so we conform to both the given maximalWidth and maximalHeight
         // while staying true to the initial aspect ratio of the image
         val (resultWidth, resultHeight) = fitMaximalDimensionsForAspectRatio(
             maximalWidth,
